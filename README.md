@@ -1,8 +1,14 @@
-# Perplexity AI Clone 🚀
+# Perplexity AI Clone
 
 A pixel-perfect clone of Perplexity AI's chat interface with functional streaming responses, built with Next.js, TypeScript, and TailwindCSS.
 
-## 🎯 Features
+## Live Demo
+
+**� Deployed Application**: [https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app](https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app)
+
+Visit the live application to experience the full Perplexity AI clone with streaming responses and interactive features.
+
+## Features
 
 - **Beautiful Landing Page**: Clean hero section with search bar that routes to chat
 - **Real-time Streaming**: Functional streaming AI responses with multiple states
@@ -13,7 +19,7 @@ A pixel-perfect clone of Perplexity AI's chat interface with functional streamin
 - **Smooth Animations**: Fade-ins, loading indicators, and transitions
 - **Auto-scroll**: Intelligent scrolling behavior when sending/receiving messages
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
@@ -23,7 +29,7 @@ A pixel-perfect clone of Perplexity AI's chat interface with functional streamin
 - **Icons**: Lucide React
 - **Markdown**: React Markdown
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -34,7 +40,7 @@ A pixel-perfect clone of Perplexity AI's chat interface with functional streamin
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/pushpendraS0/perplexity-clone.git
 cd perplexity-clone
 ```
 
@@ -50,7 +56,7 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 perplexity-clone/
@@ -74,7 +80,7 @@ perplexity-clone/
     └── chat.ts               # TypeScript types
 ```
 
-## 🎨 Key Features Implemented
+## Key Features Implemented
 
 ### 1. Landing Page
 - Hero section with gradient branding
@@ -110,7 +116,7 @@ The app handles multiple streaming states from the API:
 - Beautiful source cards
 - Markdown rendering with custom styling
 
-## 🌐 API Integration
+## API Integration
 
 The app integrates with the mock Perplexity API:
 
@@ -130,7 +136,7 @@ The app integrates with the mock Perplexity API:
 - Streaming answer text
 - Source citations
 
-## 📝 Usage
+## Usage
 
 1. **Landing Page**: Enter a question in the search bar
 2. **Chat Interface**: 
@@ -139,7 +145,7 @@ The app integrates with the mock Perplexity API:
    - Ask follow-up questions
    - Click "New Chat" to reset
 
-## 🎭 Animation Details
+## Animation Details
 
 - **Fade In**: Smooth fade-in for messages
 - **Pulse Dots**: Animated dots for URL crawling indicators
@@ -147,7 +153,10 @@ The app integrates with the mock Perplexity API:
 - **Smooth Scroll**: Auto-scroll to latest message
 - **Hover Effects**: Interactive hover states on buttons and sources
 
-## 🚢 Deployment
+## Deployment
+
+### Live Application
+Visit the deployed application: [https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app](https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app)
 
 ### Vercel (Recommended)
 
@@ -162,13 +171,13 @@ npm run build
 npm start
 ```
 
-## 📦 Build
+## Build
 
 ```bash
 npm run build
 ```
 
-## 🧪 Testing the API
+## Testing the API
 
 Test the streaming API with curl:
 
@@ -179,7 +188,7 @@ curl -X POST https://mock-askperplexity.piyushhhxyz.deno.net
   --no-buffer
 ```
 
-## 🎯 Assignment Requirements Met
+## Assignment Requirements Met
 
 ✅ Landing page with search bar  
 ✅ Chat interface with streaming responses  
@@ -197,7 +206,7 @@ curl -X POST https://mock-askperplexity.piyushhhxyz.deno.net
 ✅ shadcn/ui components  
 ✅ TanStack Query for state management  
 
-## 🏆 What Makes This Special
+## What Makes This Special
 
 - **Attention to Detail**: Every animation, transition, and loading state matches Perplexity
 - **Clean Code**: Well-organized components with TypeScript
@@ -205,7 +214,11 @@ curl -X POST https://mock-askperplexity.piyushhhxyz.deno.net
 - **UX Excellence**: Smooth interactions and feedback
 - **Professional Design**: Beautiful gradient branding and modern UI
 
-## 📧 Contact
+## Repository
+
+**GitHub Repository**: [https://github.com/pushpendraS0/perplexity-clone](https://github.com/pushpendraS0/perplexity-clone)
+
+## Contact
 
 Built with ❤️ for the Frontend Engineer Assignment
 
