@@ -1,4 +1,8 @@
-# Perplexity AI Clone
+# Pe## Live Demo
+
+**🚀 Deployed Application**: [https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app](https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app)
+
+Visit the live application to experience the full Perplexity AI clone with streaming responses and interactive features.ity AI Clone
 
 A pixel-perfect clone of Perplexity AI's chat interface with functional streaming responses, built with Next.js, TypeScript, and TailwindCSS.
 
@@ -156,7 +160,7 @@ The app integrates with the mock Perplexity API:
 ## Deployment
 
 ### Live Application
-Visit the deployed application: [https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app](https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app)
+Visit the deployed application: [https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app](https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app)
 
 ### Vercel (Recommended)
 
