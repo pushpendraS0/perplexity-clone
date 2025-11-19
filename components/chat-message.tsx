@@ -3,8 +3,6 @@
 import { Message } from "@/types/chat";
 import { User, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import PlanProgress from "./plan-progress";
-import UrlCrawler from "./url-crawler";
 import SourceCard from "./source-card";
 
 interface ChatMessageProps {
@@ -40,24 +38,24 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm">
             
             {/* Plan Progress */}
-            {message.streaming && message.planSteps && (
-              <div className="mb-4">
-                <PlanProgress steps={message.planSteps} />
-              </div>
-            )}
-
-            {/* URL Crawler */}
-            {message.urls && message.urls.length > 0 && message.phase === "crawl" && (
-              <div className="mb-4">
-                <UrlCrawler urls={message.urls} />
-              </div>
-            )}
-
-            {/* Thought Process */}
-            {message.streaming && message.phase === "analyze" && (
+            {message.currentPlan && (
               <div className="mb-4 flex items-center space-x-2 text-sm text-gray-600">
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
-                <span>Analyzing results and generating response...</span>
+                <span>{message.currentPlan}</span>
+              </div>
+            )}
+
+            {/* Searching URLs */}
+            {message.searchingUrls && message.searchingUrls.length > 0 && (
+              <div className="mb-4">
+                <div className="text-sm text-gray-600 mb-2">Searching:</div>
+                <div className="flex flex-wrap gap-2">
+                  {message.searchingUrls.map((url, index) => (
+                    <div key={index} className="bg-gray-100 px-2 py-1 rounded text-xs text-gray-700">
+                      {url}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -98,7 +96,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             )}
 
             {/* Streaming Indicator */}
-            {message.streaming && message.phase === "answer" && (
+            {message.isStreaming && (
               <div className="mt-2 flex items-center space-x-2">
                 <div className="flex space-x-1">
                   <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>

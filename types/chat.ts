@@ -4,11 +4,14 @@ export interface Message {
   content: string;
   timestamp: Date;
   streaming?: boolean;
+  isStreaming?: boolean;
   phase?: "search" | "results" | "crawl" | "analyze" | "answer" | null;
   urls?: string[];
+  searchingUrls?: string[];
   sources?: Source[];
   answerChunks?: string;
   planSteps?: PlanStep[];
+  currentPlan?: string;
 }
 
 export interface Source {

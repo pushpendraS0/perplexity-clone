@@ -69,99 +69,75 @@ export default function ChatInterface() {
 
     try {
       for await (const event of streamPerplexity(content)) {
-        console.log("Received event:", event);
+        console.log("EVENT:", event);
 
-        setMessages((prevMessages) =>
-          prevMessages.map((msg) => {
-            if (msg.id !== assistantMessage.id) return msg;
+        if (event.step_type === "INITIAL_QUERY") {
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantMessage.id
+                ? { ...m, currentPlan: "Searching..." }
+                : m
+            )
+          );
+        }
 
-            const updatedMessage = { ...msg };
+        if (event.step_type === "SEARCH_WEB") {
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantMessage.id
+                ? { ...m, currentPlan: "Finding results..." }
+                : m
+            )
+          );
+        }
 
-            switch (event.type) {
-              case "INITIAL_QUERY":
-                updatedMessage.phase = "search";
-                updatedMessage.planSteps = updatedMessage.planSteps?.map(step =>
-                  step.id === "search" 
-                    ? { ...step, status: "active" as const }
-                    : step
-                ) || [];
-                break;
+        if (event.step_type === "SEARCH_RESULTS") {
+          const urls = event.content.web_results.map((r: any) => {
+            try { return new URL(r.url).hostname.replace("www.", ""); }
+            catch { return r.name; }
+          });
 
-              case "SEARCH_WEB":
-                updatedMessage.phase = "results";
-                updatedMessage.planSteps = updatedMessage.planSteps?.map(step => {
-                  if (step.id === "search") return { ...step, status: "completed" as const };
-                  if (step.id === "results") return { ...step, status: "active" as const };
-                  return step;
-                }) || [];
-                break;
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantMessage.id
+                ? { ...m, searchingUrls: urls.slice(0, 5), currentPlan: "Crawling sources..." }
+                : m
+            )
+          );
+        }
 
-              case "SEARCH_RESULTS":
-                updatedMessage.phase = "crawl";
-                updatedMessage.planSteps = updatedMessage.planSteps?.map(step => {
-                  if (step.id === "results") return { ...step, status: "completed" as const };
-                  if (step.id === "crawl") return { ...step, status: "active" as const };
-                  return step;
-                }) || [];
-                
-                // Add URLs from search results
-                if (event.payload.web_results) {
-                  updatedMessage.urls = event.payload.web_results.map((result: any) => result.url);
-                }
-                break;
+        if (event.type === "TEXT_CHUNK") {
+          const text = event.payload.text;
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantMessage.id
+                ? { ...m, content: (m.content || "") + text, currentPlan: "Generating answer..." }
+                : m
+            )
+          );
+        }
 
-              case "URL_CRAWL_UPDATE":
-                if (event.payload.url && !updatedMessage.urls?.includes(event.payload.url)) {
-                  updatedMessage.urls = [...(updatedMessage.urls || []), event.payload.url];
-                }
-                break;
+        if (event.step_type === "FINAL") {
+          const answer = event.content.answer;
+          const sources = event.content.web_results;
 
-              case "THOUGHT_PROCESS_UPDATE":
-                updatedMessage.phase = "analyze";
-                updatedMessage.planSteps = updatedMessage.planSteps?.map(step => {
-                  if (step.id === "crawl") return { ...step, status: "completed" as const };
-                  if (step.id === "analyze") return { ...step, status: "active" as const };
-                  return step;
-                }) || [];
-                break;
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === assistantMessage.id
+                ? {
+                    ...m,
+                    content: answer,
+                    sources,
+                    isStreaming: false,
+                    currentPlan: undefined,
+                    searchingUrls: undefined
+                  }
+                : m
+            )
+          );
 
-              case "TEXT_CHUNK":
-                updatedMessage.phase = "answer";
-                updatedMessage.planSteps = updatedMessage.planSteps?.map(step => {
-                  if (step.id === "analyze") return { ...step, status: "completed" as const };
-                  if (step.id === "answer") return { ...step, status: "active" as const };
-                  return step;
-                }) || [];
-                
-                // Append text chunk to content
-                if (event.payload.text) {
-                  updatedMessage.answerChunks = (updatedMessage.answerChunks || "") + event.payload.text;
-                  updatedMessage.content = updatedMessage.answerChunks;
-                }
-                break;
-
-              case "FINAL_ANSWER":
-                updatedMessage.streaming = false;
-                updatedMessage.phase = null;
-                updatedMessage.planSteps = updatedMessage.planSteps?.map(step => 
-                  ({ ...step, status: "completed" as const })
-                ) || [];
-                
-                if (event.payload.content) {
-                  updatedMessage.content = event.payload.content;
-                }
-                break;
-
-              case "CITATIONS":
-                if (event.payload.sources) {
-                  updatedMessage.sources = event.payload.sources;
-                }
-                break;
-            }
-
-            return updatedMessage;
-          })
-        );
+          break;
+        }
 
         // Auto-scroll on each chunk
         setTimeout(scrollToBottom, 100);
