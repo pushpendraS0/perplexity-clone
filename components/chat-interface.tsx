@@ -121,13 +121,13 @@ export default function ChatInterface() {
 
           // Extract web results URLs from content
           if (event.content?.web_results && Array.isArray(event.content.web_results)) {
-            const urls = event.content.web_results.map((result: any) => {
+            const urls: string[] = event.content.web_results.map((result: any) => {
               try {
                 return new URL(result.url).hostname.replace("www.", "");
               } catch {
                 return result.name || "source";
               }
-            });
+            }).filter((url: any) => typeof url === 'string' && url.length > 0);
             searchUrls = [...new Set(urls)];
             setMessages((prev) =>
               prev.map((msg) =>
