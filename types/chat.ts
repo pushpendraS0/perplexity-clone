@@ -1,54 +1,49 @@
-export interface StreamEvent {
-  step_type?: string;
-  content?: any;
-  backend_uuid?: string;
-  context_uuid?: string;
-  uuid?: string;
-  frontend_context_uuid?: string;
-  search_focus?: string;
-  mode?: string;
-  answer?: string;
-  status?: string;
-  query_str?: string;
-  queries?: Array<{
-    engine: string;
-    query: string;
-    limit?: number;
-  }>;
-  search_info?: Array<{
-    url: string;
-    title: string;
-  }>;
-  text?: string;
+export interface Message {
+  id: string;
+  type: "user" | "assistant";
+  content: string;
+  timestamp: Date;
+  streaming?: boolean;
+  phase?: "search" | "results" | "crawl" | "analyze" | "answer" | null;
+  urls?: string[];
   sources?: Source[];
-  plan?: string;
-  web_results?: Array<{
-    name: string;
-    url: string;
-  }>;
-}
-
-export interface PlanStep {
-  step: number;
-  description: string;
+  answerChunks?: string;
+  planSteps?: PlanStep[];
 }
 
 export interface Source {
   title: string;
   url: string;
-  favicon?: string;
   snippet?: string;
+  favicon?: string;
 }
 
-export interface Message {
+export interface CrawledUrl {
+  url: string;
+  title: string;
+  favicon: string;
+  status?: "crawling" | "completed" | "error";
+}
+
+export interface StreamEvent {
+  type: "INITIAL_QUERY" | "SEARCH_WEB" | "SEARCH_RESULTS" | "URL_CRAWL_UPDATE" | "THOUGHT_PROCESS_UPDATE" | "FINAL_ANSWER" | "CITATIONS" | "TEXT_CHUNK";
+  payload: {
+    query?: string;
+    queries?: any[];
+    web_results?: any[];
+    url?: string;
+    content?: string;
+    text?: string;
+    sources?: Source[];
+    phase?: string;
+    status?: string;
+  };
+}
+
+export interface PlanStep {
   id: string;
-  role: "user" | "assistant";
-  content: string;
-  sources?: Source[];
-  isStreaming?: boolean;
-  plan?: PlanStep[];
-  currentPlan?: string;
-  searchingUrls?: string[];
+  label: string;
+  status: "pending" | "active" | "completed";
 }
 
 export interface ChatState {
