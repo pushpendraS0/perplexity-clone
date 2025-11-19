@@ -1,16 +1,218 @@
-# Pe## Live Demo
-
-**🚀 Deployed Application**: [https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app](https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app)
-
-Visit the live application to experience the full Perplexity AI clone with streaming responses and interactive features.ity AI Clone
+# Perplexity AI Clone
 
 A pixel-perfect clone of Perplexity AI's chat interface with functional streaming responses, built with Next.js, TypeScript, and TailwindCSS.
 
 ## Live Demo
 
-**� Deployed Application**: [https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app](https://perplexity-clone2-po0q4u4mv-pushpendras0s-projects.vercel.app)
+**Deployed Application**: [https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app](https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app)
 
 Visit the live application to experience the full Perplexity AI clone with streaming responses and interactive features.
+
+## Features
+
+- **Beautiful Landing Page**: Clean hero section with search bar that routes to chat
+- **Real-time Streaming**: Functional streaming AI responses with multiple states
+- **Multi-turn Conversations**: Support for 5-6 messages in one chat session
+- **Loading States**: Progressive plan updates, URL crawling indicators, and word-by-word streaming
+- **Source Citations**: Displays sources with beautiful cards at the end of responses
+- **Responsive Design**: Fully responsive and mobile-friendly
+- **Smooth Animations**: Fade-ins, loading indicators, and transitions
+- **Auto-scroll**: Intelligent scrolling behavior when sending/receiving messages
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: TailwindCSS
+- **UI Components**: shadcn/ui
+- **State Management**: TanStack Query
+- **Icons**: Lucide React
+- **Markdown**: React Markdown
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/pushpendraS0/perplexity-clone.git
+cd perplexity-clone
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Run the development server:
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Project Structure
+
+```
+perplexity-clone/
+├── app/
+│   ├── chat/
+│   │   └── page.tsx          # Chat interface page
+│   ├── globals.css           # Global styles and animations
+│   ├── layout.tsx            # Root layout with providers
+│   ├── page.tsx              # Landing page
+│   └── providers.tsx         # React Query provider
+├── components/
+│   ├── ui/                   # shadcn/ui components
+│   ├── chat-input.tsx        # Chat input with auto-resize
+│   ├── chat-interface.tsx    # Main chat interface
+│   ├── chat-message.tsx      # Message display with streaming
+│   └── landing-page.tsx      # Landing page component
+├── lib/
+│   ├── stream.ts             # Streaming API utility
+│   └── utils.ts              # Utility functions
+└── types/
+    └── chat.ts               # TypeScript types
+```
+
+## Key Features Implemented
+
+### 1. Landing Page
+- Hero section with gradient branding
+- Large search bar with smooth transitions
+- Example questions for quick start
+- Responsive design
+
+### 2. Chat Interface
+- Multi-turn conversation support
+- Real-time streaming from API
+- Loading states:
+  - "Searching..." with spinner
+  - URL crawling indicators
+  - Word-by-word answer streaming
+  - Source citations
+- New chat button
+- Auto-scroll behavior
+
+### 3. Streaming States
+The app handles multiple streaming states from the API:
+- **Initial Loading**: Displays loading spinner with status
+- **Plan Updates**: Shows current search plan
+- **URL Crawling**: Displays domains being searched with pulsing indicators
+- **Text Streaming**: Renders answer word-by-word
+- **Sources**: Shows source cards with links
+
+### 4. UI Polish
+- Gradient branding (blue to purple)
+- Smooth animations and transitions
+- Custom scrollbar styling
+- Hover effects on interactive elements
+- Responsive design for all screen sizes
+- Beautiful source cards
+- Markdown rendering with custom styling
+
+## API Integration
+
+The app integrates with a smart dynamic streaming API that generates different responses based on question categories:
+
+**Categories Supported**:
+- Programming questions (languages, coding, development)
+- People/Biography questions (who is, tell me about)
+- Technology/Concepts (what is, explain, AI, blockchain)
+- Countries/Locations (about countries, geography)
+- General questions (comprehensive fallback responses)
+
+**Streaming Events**:
+- INITIAL_QUERY: Question received
+- SEARCH_WEB: Searching indicator
+- SEARCH_RESULTS: Category-specific URLs and sources
+- TEXT_CHUNK: Word-by-word streaming with natural timing
+- FINAL: Complete answer with relevant sources
+
+## Usage
+
+1. **Landing Page**: Enter a question in the search bar
+2. **Chat Interface**: 
+   - Type your question and press Enter
+   - Watch the streaming response with loading states
+   - Ask follow-up questions
+   - Click "New Chat" to reset
+
+## Animation Details
+
+- **Fade In**: Smooth fade-in for messages
+- **Pulse Dots**: Animated dots for URL crawling indicators
+- **Shimmer**: Loading shimmer effect
+- **Smooth Scroll**: Auto-scroll to latest message
+- **Hover Effects**: Interactive hover states on buttons and sources
+
+## Deployment
+
+### Live Application
+Visit the deployed application: [https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app](https://perplexity-clone2-cmcfty2ht-pushpendras0s-projects.vercel.app)
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Deploy with one click
+
+### Manual Deployment
+
+```bash
+npm run build
+npm start
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Assignment Requirements Met
+
+- Landing page with search bar
+- Chat interface with streaming responses
+- Multi-turn conversations (5-6 messages)
+- All streaming states implemented
+- Source citations displayed
+- New chat functionality
+- Pixel-perfect UI replication
+- Smooth animations and transitions
+- Auto-scroll behavior
+- Responsive design
+- Clean code architecture
+- TypeScript for type safety
+- TailwindCSS for styling
+- shadcn/ui components
+- TanStack Query for state management
+
+## What Makes This Special
+
+- **Attention to Detail**: Every animation, transition, and loading state matches Perplexity
+- **Clean Code**: Well-organized components with TypeScript
+- **Performance**: Optimized rendering and streaming
+- **UX Excellence**: Smooth interactions and feedback
+- **Professional Design**: Beautiful gradient branding and modern UI
+- **Smart AI Responses**: Dynamic answer generation based on question categories
+
+## Repository
+
+**GitHub Repository**: [https://github.com/pushpendraS0/perplexity-clone](https://github.com/pushpendraS0/perplexity-clone)
+
+## Contact
+
+Built for the Frontend Engineer Assignment
+
+---
+
+**Note**: This is a frontend assignment project featuring a local smart streaming API that generates dynamic responses based on question categories.
 
 ## Features
 
